@@ -1,4 +1,4 @@
-class List {
+class Document {
     constructor(json) {
         this.id = json.id;
         this.name = json.name;
@@ -7,4 +7,4 @@ class List {
     }
 }
 
-export default List;
+export default Document;

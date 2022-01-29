@@ -1,19 +1,20 @@
 import axios from 'axios';
 import { list } from 'postcss';
 import React, { useEffect, useState } from 'react';
-import File from '../models/File';
+import Document from '../models/Document';
 
 
 function Sidebar(props) {
-    const [files, setFiles] = useState([]);
+    const [documents, setDocuments] = useState([]);
+    const [documentItems, setDocumentItems] = useState([]);
 
-    useEffect(() => onFetchFiles(), []);
+    useEffect(() => onFetchDocuments(), []);
 
-    const onFetchFiles = async () => {
+    const onFetchDocuments = async () => {
         try {
-            const response = await axios.get('files');
+            const response = await axios.get('documents');
 
-            setFiles(response.data.map(json => new File(json)));
+            setDocuments(response.data.map(json => new Document(json)));
         }
         catch (error) {
             console.log("Fetch failed with error", error.response.data);
@@ -22,13 +23,13 @@ function Sidebar(props) {
 
     const onCreateButtonClick = async () => {
         try {
-            const name = prompt("Insert the file's name");
+            const name = prompt("Insert the document's name");
 
-            const response = await axios.post('files', { name });
+            const response = await axios.post('documents', { name });
 
-            const files = new File(response.data);
+            const document = new Document(response.data);
 
-            onFetchFiles();
+            onFetchDocuments();
 
             // TODO Move this to the store
         }
@@ -37,18 +38,20 @@ function Sidebar(props) {
         }
     }
 
-    const onOpenFile = async (file) => {
+    const onOpenDocument = async (document) => {
         try {
-            const response = await axios.get(`files/${file.id}`);
-
-            console.log(response.data);
+            const response = await axios.get(`documents/${document.id}`);
+            console.log(documentItems);
+            setDocumentItems([{ "asd": "asd2" }]);
+            
+            console.log(documentItems);
         }
         catch (error) {
-            console.log("Fetch failed with error", error.response.data);
+            console.log("Fetch failed with error", error.response);
         }
     }
 
-    const ListItems = () =>
+    const DocumentItems = () =>
     { 
         const style =
         {
@@ -58,29 +61,29 @@ function Sidebar(props) {
             border: '1px solid rgba(0, 0, 0, .25)',
         };
 
-        let list = [];
+        let items = [];
 
         for(let i = 0; i < 100; ++i)
         {
-            list.push(<div key={i} style={style} contentEditable></div>); 
+            items.push(<div key={i} style={style} contentEditable></div>); 
         }
 
-        return (<div>{list}</div>)
+        return (<div>{items}</div>)
     }
 
     return (
         <div>
             <button className="btn btn-primary" onClick={onCreateButtonClick}>
-                Create list
+                Create document
             </button>
             <div className="row">
                 <div className="col-3">
                     <ul>
 
-                        {files.map(file =>(  // ahi busco la property
-                        <li style={{listStyleType: 'none'}} key={file.id}>
+                        {documents.map(document =>(  // ahi busco la property
+                        <li style={{documentStyleType: 'none'}} key={document.id}>
                             <button className='btn btn-block btn-link'
-                                onClick={() => onOpenFile(file)}>{file.name}
+                                onClick={() => onOpenDocument(document)}>{document.name}
                             </button>
                         </li>)
                         )} 
@@ -88,7 +91,7 @@ function Sidebar(props) {
                     </ul>
                 </div>
                 <div className="col-9">
-                    <ListItems />
+                    <DocumentItems />
                 </div>
             </div>
 

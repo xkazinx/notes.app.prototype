@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\FilesController;
+use App\Http\Controllers\DocumentsController;
 use App\Http\Requests\SaveListRequest;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -24,5 +24,4 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-
-Route::resource('files', FilesController::class);
+Route::resource('documents', DocumentsController::class);

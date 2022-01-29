@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\SaveFileRequest;
-use App\Models\File;
+use App\Http\Requests\SaveDocumentRequest;
+use App\Models\Document;
 use Illuminate\Http\Request;
 
-class FilesController extends Controller
+class DocumentsController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,7 +15,7 @@ class FilesController extends Controller
      */
     public function index()
     {
-        return File::all();
+        return Document::all();
     }
 
     /**
@@ -24,13 +24,13 @@ class FilesController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(SaveFileRequest $request)
+    public function store(SaveDocumentRequest $request)
     {
-        $file = new File($request->validated());
+        $document = new Document($request->validated());
 
-        $file->save();
+        $document->save();
 
-        return $file;
+        return $document;
     }
 
     /**
@@ -39,9 +39,9 @@ class FilesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(File $file)
-    { 
-       return $file;
+    public function show(Document $document)
+    {
+       return $document;
     }
 
     /**
