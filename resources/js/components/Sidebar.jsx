@@ -27,7 +27,7 @@ function Sidebar(props) {
 
             const response = await axios.post('documents', { name });
 
-            const document = new Document(response.data);
+            const document = new Document(respolocalnse.data);
 
             onFetchDocuments();
 
@@ -41,18 +41,60 @@ function Sidebar(props) {
     const onOpenDocument = async (document) => {
         try {
             const response = await axios.get(`documents/${document.id}`);
-            console.log(documentItems);
-            setDocumentItems([{ "asd": "asd2" }]);
-            
-            console.log(documentItems);
         }
         catch (error) {
             console.log("Fetch failed with error", error.response);
         }
     }
 
+    const onDocumentItemKeyDown = async (e) =>
+    { 
+        if (e.key === 'Tab')
+        {
+            // supongo q aca hay que hacer controller / route para documentItems.save?
+            // o lo haria el controller de documents
+            // entonces hacer controller de documentitems? por ahora mandalo en el que tenemos
+
+            // Update current item
+            const response = await axios.post(
+                `documents/${document.id}/item/update/${e.currentTarget.id}`, 
+                { 
+                    'content': e.currentTarget.textContent 
+                }
+            );
+
+            if (e.currentTarget.id == documentItems.length - 1)
+            {
+                console.log("SE");
+                
+                // Create new item
+                /*const response = await axios.post(
+                    `documents/${document.id}/item/save`, 
+                    { 
+                        'content': e.currentTarget.textContent 
+                    }
+                );*/
+            }
+        }
+    }
+
+    const onNewDocumentItem = () =>
+    {
+        setDocumentItems(documentItems => [...documentItems, { data : `New item ${documentItems.length}` }]);
+    }
+
+    const NewDocumentItemButton = () =>
+    { 
+        return (<button onClick={onNewDocumentItem} className="btn btn-primary">+</button>)
+    }
+
     const DocumentItems = () =>
     { 
+        useEffect(() => 
+        {
+
+        }, [documentItems]);
+
         const style =
         {
             backgroundColor: 'white',
@@ -61,14 +103,7 @@ function Sidebar(props) {
             border: '1px solid rgba(0, 0, 0, .25)',
         };
 
-        let items = [];
-
-        for(let i = 0; i < 100; ++i)
-        {
-            items.push(<div key={i} style={style} contentEditable></div>); 
-        }
-
-        return (<div>{items}</div>)
+        return (<div>{documentItems}</div>)
     }
 
     return (
@@ -91,8 +126,14 @@ function Sidebar(props) {
                     </ul>
                 </div>
                 <div className="col-9">
-                    <DocumentItems />
+                    {
+                    documentItems.map((item, idx, arr) =>( 
+                        <div onKeyDown={onDocumentItemKeyDown} key={idx} contentEditable>{item.data}</div>
+                    ))
+                    } 
+                    <NewDocumentItemButton />
                 </div>
+                
             </div>
 
         </div>
