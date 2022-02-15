@@ -4,5 +4,32 @@
 // Variables
 @import 'variables';
 
+$primary: gold;
+
 // Bootstrap
 @import '~bootstrap/scss/bootstrap';
+
+body
+{
+    background-color: rgb(25, 25, 25)
+}
+
+.nav-link
+{
+    
+}
+
+ul#navbar-items li
+{
+    padding-left: 0.5em;
+
+    :hover
+    {
+        //color: red;
+    }
+}
+
+a.active
+{
+    color: gold !important;
+}

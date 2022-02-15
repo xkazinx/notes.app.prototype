@@ -24,4 +24,8 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
+Route::post('documents/{document}/item/save', [DocumentsController::class, 'saveItem']);
+
+Route::post('documents/{document}/item/update/{documentItem}', [DocumentsController::class, 'updateItem']);
+
 Route::resource('documents', DocumentsController::class);

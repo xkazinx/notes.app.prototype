@@ -16,6 +16,7 @@ require('./bootstrap');
  */
 
 import Sidebar from './components/Sidebar';
+import Navbar from './components/Navbar';
 
 function App() {
     return (
@@ -27,5 +28,9 @@ function App() {
 
 if (document.getElementById('main-app')) {
     ReactDOM.render(<App />, document.getElementById('main-app'));
+}
+
+if (document.getElementById('navbar-items')) {
+    ReactDOM.render(<Navbar />, document.getElementById('navbar-items'));
 }
 

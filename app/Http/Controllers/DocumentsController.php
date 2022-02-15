@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\SaveDocumentRequest;
 use App\Models\Document;
+use App\Models\DocumentItem;
 use Illuminate\Http\Request;
 
 class DocumentsController extends Controller
@@ -65,5 +66,19 @@ class DocumentsController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function saveItem(Document $document)
+    {
+        $documentItem = new DocumentItem();
+        
+        $documentItem->save();
+    }
+
+    public function updateItem(Document $document)
+    {
+        //$documentItem = new DocumentItem();
+        
+        //$documentItem->save();
     }
 }

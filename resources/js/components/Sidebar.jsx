@@ -3,7 +3,6 @@ import { list } from 'postcss';
 import React, { useEffect, useState } from 'react';
 import Document from '../models/Document';
 
-
 function Sidebar(props) {
     const [documents, setDocuments] = useState([]);
     const [documentItems, setDocumentItems] = useState([]);
@@ -135,7 +134,6 @@ function Sidebar(props) {
                 </div>
                 
             </div>
-
         </div>
     );
 }
