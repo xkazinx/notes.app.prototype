@@ -14,4 +14,5 @@ const mix = require('laravel-mix');
 mix.js('resources/js/app.js', 'public/js')
     .sourceMaps(false, 'source-map')
     .react()
+    .extract(["react"]) // put the modules into a separate file, public/js/vendor.js #info
     .sass('resources/sass/app.scss', 'public/css');

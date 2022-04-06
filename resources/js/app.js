@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 /**
  * First we will load all of this project's JavaScript dependencies which
@@ -18,10 +19,46 @@ require('./bootstrap');
 import Sidebar from './components/Sidebar';
 import Navbar from './components/Navbar';
 
+/*
+function Food()
+{
+    return (
+        <>
+        Food
+        </>
+    );
+}
+
+function Money()
+{
+    return (
+        <>
+        Money
+        </>
+    );
+}
+
+function App() {
+    return (
+        <BrowserRouter>
+            <Routes>
+            <Route path="/" element={<App />} />
+            <Route path="food" element={<Food />} />
+            <Route path="money" element={<Money />} />
+            </Routes>
+        </BrowserRouter>
+
+        //<div className="container">
+          //  <Sidebar />
+        //</div>
+    );
+}
+*/
+
 function App() {
     return (
         <div className="container">
-            <Sidebar />
+          <Sidebar />
         </div>
     );
 }

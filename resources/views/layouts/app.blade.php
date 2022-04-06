@@ -10,8 +10,11 @@
     <title>{{ config('app.name', 'Laravel') }}</title>
 
     <!-- Scripts -->
+    <!-- #info defer: This forces the browser to wait until the DOM has fully loaded in order to execute the scripts |
+         Order matters here--> 
+    <script defer src="{{ assert('/js/vendor.js') }}"></script> 
     <script src="{{ asset('js/app.js') }}" defer></script>
-
+    
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
